@@ -1,0 +1,1 @@
+// tensor with residual support

@@ -1,0 +1,13 @@
+# build artifacts
+build/
+out/
+*.exe
+
+# CUDA
+*.ptx
+*.cubin
+
+# editor / ide
+.vscode/
+.idea/
+.vS/

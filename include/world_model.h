@@ -1,0 +1,1 @@
+struct WorldState { std::string summary; };

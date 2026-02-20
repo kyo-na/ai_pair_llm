@@ -1,0 +1,3302 @@
+[
+  {
+    "id": "order-001",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "A"
+      }
+    ],
+    "answer": [
+      "C",
+      "D",
+      "A",
+      "B",
+      "E"
+    ]
+  },
+  {
+    "id": "order-002",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "B",
+        "b": "D"
+      },
+      {
+        "type": "adjacent",
+        "a": "E",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "E"
+      }
+    ],
+    "answer": [
+      "B",
+      "C",
+      "E",
+      "D",
+      "A"
+    ]
+  },
+  {
+    "id": "order-003",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "E",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "D",
+        "b": "B"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "A",
+      "E",
+      "C",
+      "D",
+      "B"
+    ]
+  },
+  {
+    "id": "order-004",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "E"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "A"
+      },
+      {
+        "type": "not_edge",
+        "a": "A"
+      }
+    ],
+    "answer": [
+      "B",
+      "C",
+      "A",
+      "E",
+      "D"
+    ]
+  },
+  {
+    "id": "order-005",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "E",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "E",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "A"
+      }
+    ],
+    "answer": [
+      "D",
+      "B",
+      "A",
+      "E",
+      "C"
+    ]
+  },
+  {
+    "id": "order-006",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "B",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "C",
+      "B",
+      "D",
+      "E",
+      "A"
+    ]
+  },
+  {
+    "id": "order-007",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "E"
+      }
+    ],
+    "answer": [
+      "C",
+      "D",
+      "E",
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": "order-008",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "E",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "E",
+      "A",
+      "C",
+      "D",
+      "B"
+    ]
+  },
+  {
+    "id": "order-009",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "B"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "E",
+      "A",
+      "C",
+      "D",
+      "B"
+    ]
+  },
+  {
+    "id": "order-010",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "E",
+        "b": "D"
+      },
+      {
+        "type": "adjacent",
+        "a": "B",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "A",
+      "E",
+      "D",
+      "B",
+      "C"
+    ]
+  },
+  {
+    "id": "order-011",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "B"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "B"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "C",
+      "E",
+      "D",
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": "order-012",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "E",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "B"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "C",
+      "B",
+      "D",
+      "E",
+      "A"
+    ]
+  },
+  {
+    "id": "order-013",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "E"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "B"
+      },
+      {
+        "type": "not_edge",
+        "a": "A"
+      }
+    ],
+    "answer": [
+      "D",
+      "C",
+      "A",
+      "B",
+      "E"
+    ]
+  },
+  {
+    "id": "order-014",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "B",
+        "b": "E"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "B"
+      }
+    ],
+    "answer": [
+      "A",
+      "D",
+      "B",
+      "C",
+      "E"
+    ]
+  },
+  {
+    "id": "order-015",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "D"
+      },
+      {
+        "type": "adjacent",
+        "a": "B",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "A",
+      "C",
+      "D",
+      "B",
+      "E"
+    ]
+  },
+  {
+    "id": "order-016",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "E"
+      },
+      {
+        "type": "adjacent",
+        "a": "D",
+        "b": "A"
+      },
+      {
+        "type": "not_edge",
+        "a": "A"
+      }
+    ],
+    "answer": [
+      "C",
+      "D",
+      "A",
+      "E",
+      "B"
+    ]
+  },
+  {
+    "id": "order-017",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "D",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "A"
+      }
+    ],
+    "answer": [
+      "D",
+      "C",
+      "A",
+      "E",
+      "B"
+    ]
+  },
+  {
+    "id": "order-018",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "D",
+        "b": "B"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "C",
+      "E",
+      "D",
+      "B",
+      "A"
+    ]
+  },
+  {
+    "id": "order-019",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "B"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "B"
+      }
+    ],
+    "answer": [
+      "A",
+      "D",
+      "B",
+      "E",
+      "C"
+    ]
+  },
+  {
+    "id": "order-020",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "E"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "A",
+      "D",
+      "C",
+      "E",
+      "B"
+    ]
+  },
+  {
+    "id": "order-021",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "E",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "B"
+      }
+    ],
+    "answer": [
+      "E",
+      "D",
+      "B",
+      "C",
+      "A"
+    ]
+  },
+  {
+    "id": "order-022",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "B"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "D",
+      "E",
+      "C",
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": "order-023",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "D",
+        "b": "B"
+      },
+      {
+        "type": "not_edge",
+        "a": "E"
+      }
+    ],
+    "answer": [
+      "D",
+      "B",
+      "E",
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": "order-024",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "D"
+      },
+      {
+        "type": "adjacent",
+        "a": "E",
+        "b": "A"
+      },
+      {
+        "type": "not_edge",
+        "a": "A"
+      }
+    ],
+    "answer": [
+      "C",
+      "E",
+      "A",
+      "D",
+      "B"
+    ]
+  },
+  {
+    "id": "order-025",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "B"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "C",
+      "A",
+      "D",
+      "B",
+      "E"
+    ]
+  },
+  {
+    "id": "order-026",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "B"
+      },
+      {
+        "type": "adjacent",
+        "a": "B",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "B"
+      }
+    ],
+    "answer": [
+      "A",
+      "E",
+      "B",
+      "C",
+      "D"
+    ]
+  },
+  {
+    "id": "order-027",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "A"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "E",
+      "D",
+      "C",
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": "order-028",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "A"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "B",
+      "E",
+      "C",
+      "A",
+      "D"
+    ]
+  },
+  {
+    "id": "order-029",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "E",
+        "b": "B"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "A"
+      }
+    ],
+    "answer": [
+      "D",
+      "E",
+      "A",
+      "C",
+      "B"
+    ]
+  },
+  {
+    "id": "order-030",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "B"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "A",
+      "E",
+      "C",
+      "D",
+      "B"
+    ]
+  },
+  {
+    "id": "order-031",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "D"
+      },
+      {
+        "type": "adjacent",
+        "a": "D",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": "order-032",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "E",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "B"
+      }
+    ],
+    "answer": [
+      "D",
+      "A",
+      "B",
+      "E",
+      "C"
+    ]
+  },
+  {
+    "id": "order-033",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "A",
+      "C",
+      "D",
+      "B",
+      "E"
+    ]
+  },
+  {
+    "id": "order-034",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "B"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "C",
+      "A",
+      "D",
+      "B",
+      "E"
+    ]
+  },
+  {
+    "id": "order-035",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "E",
+        "b": "B"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "B"
+      },
+      {
+        "type": "not_edge",
+        "a": "B"
+      }
+    ],
+    "answer": [
+      "E",
+      "C",
+      "B",
+      "A",
+      "D"
+    ]
+  },
+  {
+    "id": "order-036",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "B"
+      },
+      {
+        "type": "adjacent",
+        "a": "E",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "C",
+      "E",
+      "D",
+      "B",
+      "A"
+    ]
+  },
+  {
+    "id": "order-037",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "B",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "D",
+        "b": "A"
+      },
+      {
+        "type": "not_edge",
+        "a": "A"
+      }
+    ],
+    "answer": [
+      "B",
+      "D",
+      "A",
+      "C",
+      "E"
+    ]
+  },
+  {
+    "id": "order-038",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "E",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "A"
+      },
+      {
+        "type": "not_edge",
+        "a": "E"
+      }
+    ],
+    "answer": [
+      "B",
+      "D",
+      "E",
+      "C",
+      "A"
+    ]
+  },
+  {
+    "id": "order-039",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "D"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "A",
+      "C",
+      "D",
+      "E",
+      "B"
+    ]
+  },
+  {
+    "id": "order-040",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "B"
+      },
+      {
+        "type": "adjacent",
+        "a": "B",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "A"
+      }
+    ],
+    "answer": [
+      "C",
+      "D",
+      "A",
+      "B",
+      "E"
+    ]
+  },
+  {
+    "id": "order-041",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "E"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "B"
+      }
+    ],
+    "answer": [
+      "C",
+      "D",
+      "B",
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": "order-042",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "E",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "D",
+      "E",
+      "C",
+      "B",
+      "A"
+    ]
+  },
+  {
+    "id": "order-043",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "E",
+        "b": "B"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "E"
+      }
+    ],
+    "answer": [
+      "A",
+      "C",
+      "E",
+      "D",
+      "B"
+    ]
+  },
+  {
+    "id": "order-044",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "B"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "A",
+      "C",
+      "D",
+      "B",
+      "E"
+    ]
+  },
+  {
+    "id": "order-045",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "E",
+        "b": "D"
+      },
+      {
+        "type": "adjacent",
+        "a": "B",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "A"
+      }
+    ],
+    "answer": [
+      "E",
+      "D",
+      "A",
+      "B",
+      "C"
+    ]
+  },
+  {
+    "id": "order-046",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "E",
+        "b": "D"
+      },
+      {
+        "type": "adjacent",
+        "a": "D",
+        "b": "A"
+      },
+      {
+        "type": "not_edge",
+        "a": "E"
+      }
+    ],
+    "answer": [
+      "C",
+      "B",
+      "E",
+      "D",
+      "A"
+    ]
+  },
+  {
+    "id": "order-047",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "B",
+        "b": "D"
+      },
+      {
+        "type": "adjacent",
+        "a": "B",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "E",
+      "B",
+      "D",
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": "order-048",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "B",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "B",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "A"
+      }
+    ],
+    "answer": [
+      "B",
+      "E",
+      "A",
+      "D",
+      "C"
+    ]
+  },
+  {
+    "id": "order-049",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "B"
+      },
+      {
+        "type": "adjacent",
+        "a": "D",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "A",
+      "D",
+      "C",
+      "E",
+      "B"
+    ]
+  },
+  {
+    "id": "order-050",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "E",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "B"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "D",
+      "E",
+      "C",
+      "B",
+      "A"
+    ]
+  },
+  {
+    "id": "order-051",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "B",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "B",
+      "C",
+      "D",
+      "E",
+      "A"
+    ]
+  },
+  {
+    "id": "order-052",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "E",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "A"
+      }
+    ],
+    "answer": [
+      "B",
+      "E",
+      "A",
+      "D",
+      "C"
+    ]
+  },
+  {
+    "id": "order-053",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "E"
+      },
+      {
+        "type": "adjacent",
+        "a": "D",
+        "b": "B"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "C",
+      "A",
+      "D",
+      "B",
+      "E"
+    ]
+  },
+  {
+    "id": "order-054",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "B"
+      },
+      {
+        "type": "adjacent",
+        "a": "B",
+        "b": "A"
+      },
+      {
+        "type": "not_edge",
+        "a": "B"
+      }
+    ],
+    "answer": [
+      "C",
+      "E",
+      "B",
+      "A",
+      "D"
+    ]
+  },
+  {
+    "id": "order-055",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "E",
+        "b": "A"
+      },
+      {
+        "type": "not_edge",
+        "a": "A"
+      }
+    ],
+    "answer": [
+      "C",
+      "E",
+      "A",
+      "D",
+      "B"
+    ]
+  },
+  {
+    "id": "order-056",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "D"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "B"
+      },
+      {
+        "type": "not_edge",
+        "a": "E"
+      }
+    ],
+    "answer": [
+      "C",
+      "B",
+      "E",
+      "A",
+      "D"
+    ]
+  },
+  {
+    "id": "order-057",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "A",
+      "E",
+      "D",
+      "C",
+      "B"
+    ]
+  },
+  {
+    "id": "order-058",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "B",
+        "b": "E"
+      },
+      {
+        "type": "adjacent",
+        "a": "D",
+        "b": "B"
+      },
+      {
+        "type": "not_edge",
+        "a": "E"
+      }
+    ],
+    "answer": [
+      "D",
+      "B",
+      "E",
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": "order-059",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "E"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "B",
+      "D",
+      "C",
+      "E",
+      "A"
+    ]
+  },
+  {
+    "id": "order-060",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "D"
+      },
+      {
+        "type": "adjacent",
+        "a": "B",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "A"
+      }
+    ],
+    "answer": [
+      "C",
+      "D",
+      "A",
+      "B",
+      "E"
+    ]
+  },
+  {
+    "id": "order-061",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "E",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "E",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "B",
+      "E",
+      "C",
+      "A",
+      "D"
+    ]
+  },
+  {
+    "id": "order-062",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "D"
+      },
+      {
+        "type": "adjacent",
+        "a": "B",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "E",
+      "B",
+      "C",
+      "A",
+      "D"
+    ]
+  },
+  {
+    "id": "order-063",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "E"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "A",
+      "B",
+      "C",
+      "E",
+      "D"
+    ]
+  },
+  {
+    "id": "order-064",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "B",
+        "b": "D"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "B"
+      },
+      {
+        "type": "not_edge",
+        "a": "B"
+      }
+    ],
+    "answer": [
+      "C",
+      "A",
+      "B",
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": "order-065",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "E",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "E",
+      "A",
+      "C",
+      "D",
+      "B"
+    ]
+  },
+  {
+    "id": "order-066",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "B"
+      },
+      {
+        "type": "adjacent",
+        "a": "E",
+        "b": "B"
+      },
+      {
+        "type": "not_edge",
+        "a": "E"
+      }
+    ],
+    "answer": [
+      "D",
+      "C",
+      "E",
+      "B",
+      "A"
+    ]
+  },
+  {
+    "id": "order-067",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "B"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "B"
+      }
+    ],
+    "answer": [
+      "C",
+      "D",
+      "B",
+      "E",
+      "A"
+    ]
+  },
+  {
+    "id": "order-068",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "E",
+        "b": "D"
+      },
+      {
+        "type": "adjacent",
+        "a": "E",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "B",
+      "E",
+      "C",
+      "D",
+      "A"
+    ]
+  },
+  {
+    "id": "order-069",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "E",
+        "b": "A"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "D",
+      "B",
+      "C",
+      "E",
+      "A"
+    ]
+  },
+  {
+    "id": "order-070",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "E"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "B",
+      "D",
+      "C",
+      "E",
+      "A"
+    ]
+  },
+  {
+    "id": "order-071",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "B"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "E",
+      "D",
+      "C",
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": "order-072",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "E",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "A"
+      }
+    ],
+    "answer": [
+      "D",
+      "B",
+      "A",
+      "E",
+      "C"
+    ]
+  },
+  {
+    "id": "order-073",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "B"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "A"
+      }
+    ],
+    "answer": [
+      "C",
+      "B",
+      "A",
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": "order-074",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "E",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "E",
+      "C",
+      "D",
+      "B",
+      "A"
+    ]
+  },
+  {
+    "id": "order-075",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "B"
+      },
+      {
+        "type": "adjacent",
+        "a": "B",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "A"
+      }
+    ],
+    "answer": [
+      "D",
+      "C",
+      "A",
+      "B",
+      "E"
+    ]
+  },
+  {
+    "id": "order-076",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "E"
+      }
+    ],
+    "answer": [
+      "D",
+      "C",
+      "E",
+      "A",
+      "B"
+    ]
+  },
+  {
+    "id": "order-077",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "B",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "E",
+        "b": "A"
+      },
+      {
+        "type": "not_edge",
+        "a": "E"
+      }
+    ],
+    "answer": [
+      "B",
+      "D",
+      "E",
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": "order-078",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "B",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "D",
+        "b": "A"
+      },
+      {
+        "type": "not_edge",
+        "a": "B"
+      }
+    ],
+    "answer": [
+      "C",
+      "E",
+      "B",
+      "D",
+      "A"
+    ]
+  },
+  {
+    "id": "order-079",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "E"
+      }
+    ],
+    "answer": [
+      "B",
+      "A",
+      "E",
+      "D",
+      "C"
+    ]
+  },
+  {
+    "id": "order-080",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "B",
+        "b": "D"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "B"
+      },
+      {
+        "type": "not_edge",
+        "a": "B"
+      }
+    ],
+    "answer": [
+      "E",
+      "C",
+      "B",
+      "D",
+      "A"
+    ]
+  },
+  {
+    "id": "order-081",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "C",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "A"
+      },
+      {
+        "type": "not_edge",
+        "a": "E"
+      }
+    ],
+    "answer": [
+      "B",
+      "D",
+      "E",
+      "C",
+      "A"
+    ]
+  },
+  {
+    "id": "order-082",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "B"
+      }
+    ],
+    "answer": [
+      "C",
+      "E",
+      "B",
+      "D",
+      "A"
+    ]
+  },
+  {
+    "id": "order-083",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "E"
+      },
+      {
+        "type": "adjacent",
+        "a": "B",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "B",
+      "C",
+      "D",
+      "A",
+      "E"
+    ]
+  },
+  {
+    "id": "order-084",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "E",
+        "b": "D"
+      },
+      {
+        "type": "adjacent",
+        "a": "E",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "B",
+      "E",
+      "C",
+      "D",
+      "A"
+    ]
+  },
+  {
+    "id": "order-085",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "D",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "B",
+      "D",
+      "C",
+      "E",
+      "A"
+    ]
+  },
+  {
+    "id": "order-086",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "B"
+      }
+    ],
+    "answer": [
+      "A",
+      "D",
+      "B",
+      "C",
+      "E"
+    ]
+  },
+  {
+    "id": "order-087",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "B",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "D",
+        "b": "B"
+      },
+      {
+        "type": "not_edge",
+        "a": "B"
+      }
+    ],
+    "answer": [
+      "E",
+      "D",
+      "B",
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": "order-088",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "B",
+        "b": "E"
+      },
+      {
+        "type": "adjacent",
+        "a": "E",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "B",
+      "E",
+      "D",
+      "C",
+      "A"
+    ]
+  },
+  {
+    "id": "order-089",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "B",
+        "b": "D"
+      },
+      {
+        "type": "adjacent",
+        "a": "E",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "B",
+      "A",
+      "D",
+      "E",
+      "C"
+    ]
+  },
+  {
+    "id": "order-090",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "B",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "A"
+      },
+      {
+        "type": "not_edge",
+        "a": "B"
+      }
+    ],
+    "answer": [
+      "D",
+      "E",
+      "B",
+      "C",
+      "A"
+    ]
+  },
+  {
+    "id": "order-091",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "B",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "D",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "B"
+      }
+    ],
+    "answer": [
+      "D",
+      "E",
+      "B",
+      "A",
+      "C"
+    ]
+  },
+  {
+    "id": "order-092",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "B",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "C",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "D",
+      "B",
+      "C",
+      "E",
+      "A"
+    ]
+  },
+  {
+    "id": "order-093",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "E",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "B",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "B"
+      }
+    ],
+    "answer": [
+      "E",
+      "A",
+      "B",
+      "C",
+      "D"
+    ]
+  },
+  {
+    "id": "order-094",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "D",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "E",
+        "b": "D"
+      },
+      {
+        "type": "not_edge",
+        "a": "A"
+      }
+    ],
+    "answer": [
+      "E",
+      "D",
+      "A",
+      "C",
+      "B"
+    ]
+  },
+  {
+    "id": "order-095",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "E"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "A",
+      "E",
+      "D",
+      "B",
+      "C"
+    ]
+  },
+  {
+    "id": "order-096",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "B",
+        "b": "A"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "B",
+      "A",
+      "D",
+      "E",
+      "C"
+    ]
+  },
+  {
+    "id": "order-097",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "B",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "B",
+        "b": "C"
+      },
+      {
+        "type": "not_edge",
+        "a": "D"
+      }
+    ],
+    "answer": [
+      "B",
+      "C",
+      "D",
+      "E",
+      "A"
+    ]
+  },
+  {
+    "id": "order-098",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "A",
+        "b": "C"
+      },
+      {
+        "type": "adjacent",
+        "a": "B",
+        "b": "A"
+      },
+      {
+        "type": "not_edge",
+        "a": "C"
+      }
+    ],
+    "answer": [
+      "B",
+      "A",
+      "C",
+      "D",
+      "E"
+    ]
+  },
+  {
+    "id": "order-099",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "B",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "D",
+        "b": "B"
+      },
+      {
+        "type": "not_edge",
+        "a": "E"
+      }
+    ],
+    "answer": [
+      "D",
+      "B",
+      "E",
+      "C",
+      "A"
+    ]
+  },
+  {
+    "id": "order-100",
+    "items": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "constraints": [
+      {
+        "type": "left_of",
+        "a": "B",
+        "b": "A"
+      },
+      {
+        "type": "adjacent",
+        "a": "A",
+        "b": "E"
+      },
+      {
+        "type": "not_edge",
+        "a": "B"
+      }
+    ],
+    "answer": [
+      "D",
+      "C",
+      "B",
+      "A",
+      "E"
+    ]
+  }
+]
