@@ -1,0 +1,10 @@
+^C:\USERS\SPENC\DOWNLOADS\AI_PAIR_LLM\BUILD\CMAKEFILES\262813399954D0F9963D51E1E10D0E3E\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/spenc/Downloads/ai_pair_llm -BC:/Users/spenc/Downloads/ai_pair_llm/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/spenc/Downloads/ai_pair_llm/build/ai_pair_llm.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,0 +1,1 @@
+int sample_next_token();

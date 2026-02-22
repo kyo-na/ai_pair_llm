@@ -1,0 +1,5 @@
+C:/Users/spenc/Downloads/ai_pair_llm/build/CMakeFiles/engine.dir
+C:/Users/spenc/Downloads/ai_pair_llm/build/CMakeFiles/runtime.dir
+C:/Users/spenc/Downloads/ai_pair_llm/build/CMakeFiles/ai_pair_llm.dir
+C:/Users/spenc/Downloads/ai_pair_llm/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/spenc/Downloads/ai_pair_llm/build/CMakeFiles/ZERO_CHECK.dir

@@ -1,4 +1,0 @@
-
-[
-  {"id":"math-001","category":"math","prompt":"(12+8)*(5-3)/4","answer":"10","verifier":"numeric"}
-]

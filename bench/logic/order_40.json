@@ -1,4 +1,0 @@
-
-[
-  {"id":"logic-001","category":"logic","prompt":"A,B,Cを並べる。AはBより左。","answer":"A B C","verifier":"order"}
-]

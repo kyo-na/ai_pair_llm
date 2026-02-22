@@ -1,0 +1,4 @@
+
+[
+  {"id":"ja-001","category":"ja","prompt":"日本の首都はどこですか？","answer":"東京","verifier":"exact"}
+]

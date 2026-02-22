@@ -1,1 +1,0 @@
-void causal_attention_cpu();

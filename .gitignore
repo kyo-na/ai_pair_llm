@@ -1,13 +1,8 @@
-# build artifacts
-build/
-out/
+# Build artifacts
 *.exe
+*.obj
+*.o
+*.pdb
 
-# CUDA
-*.ptx
-*.cubin
-
-# editor / ide
-.vscode/
-.idea/
-.vS/
+# Models (not included)
+models/
