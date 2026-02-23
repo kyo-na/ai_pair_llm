@@ -1,30 +1,18 @@
+// attention4d.h
 #pragma once
-#include <vector>
-#include <cmath>
 #include "tensor4d.h"
-#include "layers/linear4d.h"
+#include "softmax4d.h"
 
 struct Attention4D {
+    Tensor4D last_attn;
 
-    int dim = 0;
+    Tensor4D forward(const Tensor4D& qk) {
+        last_attn = softmax4d(qk);
+        return last_attn;
+    }
 
-    Linear4D Wq;
-    Linear4D Wk;
-    Linear4D Wv;
-
-    // 保存（backward 用）
-    Tensor4D Q;
-    Tensor4D K;
-    Tensor4D V;
-
-    // attention weights (B,T,T)
-    std::vector<float> attn;
-
-    Attention4D() = default;
-    Attention4D(int d);
-
-    Tensor4D forward(const Tensor4D& x);
-    Tensor4D backward(const Tensor4D& dout);
-
-    void step(float lr);
+    Tensor4D backward(const Tensor4D& grad_out) {
+        // ★ 簡易：softmax backward 省略（実験用）
+        return grad_out;
+    }
 };

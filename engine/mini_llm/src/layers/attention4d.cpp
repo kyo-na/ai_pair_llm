@@ -1,169 +1,73 @@
-#include "layers/attention4d.h"
+// engine/mini_llm/src/layers/attention4d.cpp
+#include <cmath>
+#include <vector>
 #include <algorithm>
-#include <cassert>
+#include "../../include/layers/attention4d.h"
 
-static inline float clampf(float x, float lo, float hi){
-    return std::max(lo, std::min(hi, x));
-}
+namespace mini_llm {
 
-Attention4D::Attention4D(int d)
-    : dim(d),
-      Wq(d,d),
-      Wk(d,d),
-      Wv(d,d)
-{
-}
-
-Tensor4D Attention4D::forward(const Tensor4D& x){
-
-    assert(x.D == dim);
-
-    Q = Wq.forward(x);
-    K = Wk.forward(x);
-    V = Wv.forward(x);
-
-    Tensor4D y(x.B, x.T, x.H, x.D);
-
-    attn.assign((size_t)x.B * x.T * x.T, 0.0f);
-
-    const float scale   = 1.0f / std::sqrt((float)dim);
-    const float NEG_INF = -1e9f;
-
-    for(int b=0;b<x.B;b++){
-        for(int t=0;t<x.T;t++){
-
-            std::vector<float> score(x.T);
-
-            // ---- QK^T + Causal Mask ----
-            for(int tj=0;tj<x.T;tj++){
-
-                if(tj > t){
-                    score[tj] = NEG_INF;  // 未来は見えない
-                    continue;
-                }
-
-                double s = 0.0;
-                for(int d=0; d<dim; d++){
-                    s += (double)Q.at(b,t,0,d) *
-                         (double)K.at(b,tj,0,d);
-                }
-
-                score[tj] = (float)(s * scale);
-            }
-
-            // ---- max subtraction (数値安定) ----
-            float m = *std::max_element(score.begin(), score.end());
-            for(auto& v : score){
-                v = clampf(v - m, -50.0f, 50.0f);
-            }
-
-            // ---- softmax ----
-            double sum = 0.0;
-            for(auto v : score){
-                sum += std::exp((double)v);
-            }
-
-            for(int tj=0;tj<x.T;tj++){
-                float p = (float)(std::exp((double)score[tj]) / sum);
-                attn[(size_t)b*x.T*x.T +
-                     (size_t)t*x.T +
-                     (size_t)tj] = p;
-            }
-
-            // ---- weighted sum ----
-            for(int d=0; d<dim; d++){
-                double out = 0.0;
-                for(int tj=0;tj<x.T;tj++){
-                    float p = attn[(size_t)b*x.T*x.T +
-                                   (size_t)t*x.T +
-                                   (size_t)tj];
-                    out += (double)p *
-                           (double)V.at(b,tj,0,d);
-                }
-                y.at(b,t,0,d) = (float)out;
-            }
-        }
+// ----------------------------
+// Softmax (last dimension)
+// ----------------------------
+static void softmax(std::vector<float>& v) {
+    float maxv = *std::max_element(v.begin(), v.end());
+    float sum = 0.0f;
+    for (auto& x : v) {
+        x = std::exp(x - maxv);
+        sum += x;
     }
-
-    return y;
+    for (auto& x : v) x /= sum;
 }
 
-Tensor4D Attention4D::backward(const Tensor4D& dout){
+// ----------------------------
+// Forward
+// ----------------------------
+Tensor4D Attention4D::forward(const Tensor4D& x) {
+    // x: [B,T,H,D]
+    Tensor4D out(x.B, x.T, x.H, x.D);
+    cache_x = x;
 
-    Tensor4D dQ(Q.B, Q.T, Q.H, Q.D);
-    Tensor4D dK(K.B, K.T, K.H, K.D);
-    Tensor4D dV(V.B, V.T, V.H, V.D);
+    for (int b = 0; b < x.B; ++b) {
+        for (int h = 0; h < x.H; ++h) {
+            for (int t = 0; t < x.T; ++t) {
 
-    const float scale = 1.0f / std::sqrt((float)dim);
+                std::vector<float> scores(x.T);
 
-    for(int b=0;b<Q.B;b++){
-        for(int t=0;t<Q.T;t++){
-
-            std::vector<float> p(Q.T);
-            std::vector<float> g(Q.T);
-
-            // g_j = dout · V_j
-            for(int tj=0;tj<Q.T;tj++){
-
-                p[tj] = attn[(size_t)b*Q.T*Q.T +
-                             (size_t)t*Q.T +
-                             (size_t)tj];
-
-                double dot = 0.0;
-                for(int d=0; d<dim; d++){
-                    dot += (double)dout.at(b,t,0,d) *
-                           (double)V.at(b,tj,0,d);
+                // QK^T
+                for (int tp = 0; tp < x.T; ++tp) {
+                    float dot = 0.0f;
+                    for (int d = 0; d < x.D; ++d) {
+                        dot += x(b,t,h,d) * x(b,tp,h,d);
+                    }
+                    scores[tp] = dot / std::sqrt((float)x.D);
                 }
-                g[tj] = (float)dot;
-            }
 
-            // 完全 softmax backward
-            double pg = 0.0;
-            for(int j=0;j<Q.T;j++){
-                pg += (double)p[j] * (double)g[j];
-            }
+                softmax(scores);
 
-            std::vector<float> dscore(Q.T);
-
-            for(int j=0;j<Q.T;j++){
-                dscore[j] = p[j] * (g[j] - (float)pg);
-                dscore[j] = clampf(dscore[j], -5.0f, 5.0f);
-            }
-
-            // Q/K grad
-            for(int tj=0;tj<Q.T;tj++){
-                for(int d=0; d<dim; d++){
-                    dQ.at(b,t,0,d)  +=
-                        dscore[tj] * K.at(b,tj,0,d) * scale;
-
-                    dK.at(b,tj,0,d) +=
-                        dscore[tj] * Q.at(b,t,0,d)  * scale;
-                }
-            }
-
-            // V grad
-            for(int tj=0;tj<Q.T;tj++){
-                for(int d=0; d<dim; d++){
-                    dV.at(b,tj,0,d) +=
-                        p[tj] * dout.at(b,t,0,d);
+                // weighted sum
+                for (int d = 0; d < x.D; ++d) {
+                    float v = 0.0f;
+                    for (int tp = 0; tp < x.T; ++tp) {
+                        v += scores[tp] * x(b,tp,h,d);
+                    }
+                    out(b,t,h,d) = v;
                 }
             }
         }
     }
-
-    Tensor4D dx  = Wq.backward(dQ);
-    Tensor4D dk  = Wk.backward(dK);
-    Tensor4D dv  = Wv.backward(dV);
-
-    for(size_t i=0;i<dx.data.size();i++){
-        dx.data[i] += dk.data[i] + dv.data[i];
-    }
-
-    return dx;
+    return out;
 }
 
-void Attention4D::step(float lr){
-    Wq.step(lr);
-    Wk.step(lr);
-    Wv.step(lr);
+// ----------------------------
+// Backward（最小版）
+// ----------------------------
+Tensor4D Attention4D::backward(const Tensor4D& grad_out) {
+    Tensor4D grad_in = grad_out;
+    return grad_in;
 }
+
+void Attention4D::step(float /*lr*/) {
+    // no parameters
+}
+
+} // namespace mini_llm

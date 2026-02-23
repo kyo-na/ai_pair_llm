@@ -1,26 +1,26 @@
 #include "loss/cross_entropy.h"
 #include <cmath>
 
-float cross_entropy(const Tensor4D& logits,
-                    const std::vector<int>& targets,
-                    int vocab_size)
-{
-    float loss = 0.0f;
+float softmax_cross_entropy(
+    const Tensor4D& logits,
+    int target,
+    Tensor4D& dlogits
+){
+    const int V = logits.W;
+    float maxv=-1e9;
+    for(int i=0;i<V;i++)
+        maxv = std::max(maxv, logits.data[i]);
 
-    for (int t = 0; t < targets.size(); ++t) {
-        int base = t * vocab_size;
-
-        float maxv = logits.data[base];
-        for (int i = 1; i < vocab_size; ++i)
-            maxv = std::max(maxv, logits.data[base+i]);
-
-        float sum = 0.0f;
-        for (int i = 0; i < vocab_size; ++i)
-            sum += std::exp(logits.data[base+i] - maxv);
-
-        float logprob = logits.data[base + targets[t]] - maxv - std::log(sum);
-        loss -= logprob;
+    float sum=0;
+    for(int i=0;i<V;i++){
+        dlogits.data[i]=std::exp(logits.data[i]-maxv);
+        sum+=dlogits.data[i];
     }
 
-    return loss / targets.size();
+    for(int i=0;i<V;i++)
+        dlogits.data[i]/=sum;
+
+    float loss = -std::log(dlogits.data[target]+1e-9f);
+    dlogits.data[target]-=1.f;
+    return loss;
 }

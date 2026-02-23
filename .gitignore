@@ -1,8 +1,22 @@
-# Build artifacts
+# --- build artifacts ---
+build/
+**/build/
 *.exe
 *.obj
-*.o
 *.pdb
+*.ilk
+*.tlog
+*.log
 
-# Models (not included)
-models/
+# --- learned weights ---
+*.bin
+*.ckpt
+
+# --- training data ---
+engine/mini_llm/data/
+dataset/
+**/data/*.txt
+**/dataset/*.txt
+
+# --- misc ---
+.vs/

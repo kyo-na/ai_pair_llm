@@ -1,68 +1,47 @@
+#include "../include/tensor4d.h"
 #include <iostream>
-#include <vector>
 #include <random>
+#include "../include/tensor4d.h"
+#include "../include/adam.h"
 
-#include "../tokenizer/tokenizer.h"
-#include "../tokenizer/vocab.h"
-#include "../model/embedding.h"
-#include "../model/linear.h"
-#include "../model/loss.h"
-
-using namespace mini_llm;
-
-// 自動生成FSMデータ
-std::vector<std::string> generate_data(int n) {
-    std::vector<std::string> states =
-        {"idle","walk","run","eat","sleep"};
-    std::vector<std::pair<int,int>> rules =
-        {{0,1},{1,2},{2,0},{0,3},{3,4},{4,0}};
-    std::mt19937 rng(42);
-
-    std::vector<std::string> out;
-    for (int i=0;i<n;i++) {
-        auto r = rules[rng()%rules.size()];
-        out.push_back(states[r.first] + " -> " +
-                      states[r.second] + ".");
-    }
-    return out;
-}
+// ダミー「学習」
+// embedding と projection を Adam で少し動かすだけ
 
 int main() {
-    Tokenizer tokenizer;
-    Vocab vocab;
+    const int vocab = 16;
+    const int dim   = 8;
 
-    constexpr int DIM = 64;
-    Embedding emb(4096, DIM); // vocabは動的拡張
-    Linear proj(DIM, DIM);
+    // Embedding: [1,1,vocab,dim]
+    Tensor4D emb(1,1,vocab,dim);
 
-    auto corpus = generate_data(2000);
+    // Projection: [1,1,dim,vocab]
+    Tensor4D proj(1,1,dim,vocab);
 
-    float total_loss=0.0f;
-    int steps=0;
+    // 初期化
+    std::mt19937 rng(0);
+    std::uniform_real_distribution<float> dist(-0.1f, 0.1f);
 
-    for (auto& line : corpus) {
-        auto cps = tokenizer.encode(line);
-        std::vector<int> ids;
-        for (auto cp : cps)
-            ids.push_back(vocab.token_to_id(cp));
+    for (auto& x : emb.data)  x = dist(rng);
+    for (auto& x : proj.data) x = dist(rng);
 
-        for (size_t i=0;i+1<ids.size();++i) {
-            auto x = emb.forward(ids[i]);
-            auto y = proj.forward(x);
-            auto t = emb.forward(ids[i+1]);
+    // ダミー勾配
+    for (int step=0; step<10; step++) {
+        emb.zero_grad();
+        proj.zero_grad();
 
-            float loss = mse_loss(y,t);
-            total_loss += loss;
-            steps++;
+        for (int i=0;i<emb.size();i++)  emb.grad[i]  = 0.01f;
+        for (int i=0;i<proj.size();i++) proj.grad[i] = -0.01f;
 
-            auto dy = mse_grad(y,t);
-            auto dx = proj.backward(dy);
-            emb.backward(ids[i],dx);
-
-            emb.step(0.05f);
-            proj.step(0.05f);
-        }
+        // Adam
+        static Adam opt_emb(emb.size(), 1e-2f);
+        static Adam opt_proj(proj.size(), 1e-2f);
+        opt_emb.update(emb);
+        opt_proj.update(proj);
     }
 
-    std::cout<<"avg_loss="<<(total_loss/steps)<<std::endl;
+    emb.save("weights_emb.bin");
+    proj.save("weights_proj.bin");
+
+    std::cout << "saved: weights_emb.bin / weights_proj.bin\n";
+    return 0;
 }

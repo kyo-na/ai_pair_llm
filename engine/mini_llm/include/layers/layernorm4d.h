@@ -1,29 +1,27 @@
 #pragma once
-#include "tensor4d.h"
-#include <vector>
+#include "../tensor4d.h"
 
-struct LayerNorm4D {
-    int dim = 0;
-    float eps = 1e-5f;
+struct Linear {
+    Tensor4D W;
 
-    // γ, β
-    std::vector<float> gamma, beta;
-    std::vector<float> dgamma, dbeta;
-    std::vector<float> mg, vg, mb, vb;
+    Linear(int in,int out)
+        : W(1,1,in,out) {}
 
-    int step_count = 0;
+    Tensor4D forward(const Tensor4D& x){
+        Tensor4D y(1,1,1,W.D);
+        for(int o=0;o<W.D;o++)
+            for(int i=0;i<W.C;i++)
+                y.at(0,0,0,o)+=x.at(0,0,0,i)*W.at(0,0,i,o);
+        return y;
+    }
 
-    // forward保存用
-    Tensor4D x_hat;
-    std::vector<float> mean;
-    std::vector<float> var;
-
-    LayerNorm4D() = default;
-    LayerNorm4D(int dim);
-
-    Tensor4D forward(const Tensor4D& x);
-    Tensor4D backward(const Tensor4D& dout);
-
-    void zero_grad();
-    void step(float lr);
+    Tensor4D backward(const Tensor4D& dy){
+        Tensor4D dx(1,1,1,W.C);
+        for(int o=0;o<W.D;o++)
+            for(int i=0;i<W.C;i++){
+                W.grad[W.idx(0,0,i,o)] += dy.at(0,0,0,o);
+                dx.at(0,0,0,i)+=dy.at(0,0,0,o)*W.at(0,0,i,o);
+            }
+        return dx;
+    }
 };
