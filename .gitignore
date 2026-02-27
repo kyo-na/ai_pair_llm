@@ -27,3 +27,8 @@ engine/mini_llm.zip
 # CUDA build
 *.cubin
 *.ptx
+
+*.cu
+*.cuh
+*.ptx
+*.cubin
