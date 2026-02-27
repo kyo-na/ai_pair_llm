@@ -1,22 +1,29 @@
-# --- build artifacts ---
+# Build
 build/
-**/build/
+Debug/
+Release/
 *.exe
 *.obj
 *.pdb
+*.lib
+*.dll
+*.exp
 *.ilk
-*.tlog
-*.log
 
-# --- learned weights ---
-*.bin
-*.ckpt
-
-# --- training data ---
-engine/mini_llm/data/
-dataset/
-**/data/*.txt
-**/dataset/*.txt
-
-# --- misc ---
+# VS
 .vs/
+*.VC.db
+*.VC.opendb
+
+# Python
+__pycache__/
+*.pyc
+
+# Data
+*.txt
+corpus.txt
+engine/mini_llm.zip
+
+# CUDA build
+*.cubin
+*.ptx

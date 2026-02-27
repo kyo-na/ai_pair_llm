@@ -1,32 +1,30 @@
 #include <iostream>
 #include <vector>
+#include "world4d.h"
+#include "mini_llm.h"
 
-#include "tokenizer.h"
-#include "vocab.h"
+int main() {
+    constexpr size_t B = 1, T = 128, D = 4, C = 16, VOCAB = 256;
 
-#include "model/mini_AI.h"
-#include "world/world_model.h"
-#include "tensor4d.h"
+    World4D world(B, T, D, C);
+    MiniLLM mini(VOCAB, C);
 
-using namespace mini_llm;
+    mini.load_weights(
+    "C:\\Users\\spenc\\Downloads\\ai_pair_llm\\engine\\mini_llm\\train\\weights_emb.bin",
+    "C:\\Users\\spenc\\Downloads\\ai_pair_llm\\engine\\mini_llm\\train\\weights_proj.bin"
+);
 
-void cpu_run_once() {
-    Tokenizer tokenizer;
-    Vocab vocab; // ロードなし（未実装）
+    for (size_t t = 0; t < T; ++t) {
+        std::vector<unsigned> input_ids = {
+            static_cast<unsigned>(t % VOCAB)
+        };
 
-    auto cps = tokenizer.encode("こんにちは");
+        mini.step(world, t, input_ids);
 
-    Tensor4D x(1, 8, 1, 64);
-    for (auto& v : x.data) v = 0.2f;
+        float energy = 0.0f;
+        for (size_t c = 0; c < C; ++c)
+            energy += world.at(0, t, 0, c);
 
-    MiniAI ai(2, 64);
-
-    WorldModel world(1, 8, 1, 64);
-    world.init();
-
-    Tensor4D h = ai.forward(x);
-    world.inject_observation(h);
-    world.step_forward();
-
-    std::cout << "cpu_run_once OK\n";
+        std::cout << "t=" << t << " energy=" << energy << "\n";
+    }
 }

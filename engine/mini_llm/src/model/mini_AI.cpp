@@ -1,37 +1,26 @@
-#include "model/mini_AI.h"
+#include "../../include/model/mini_AI.h"
+#include <fstream>
+#include <cmath>
 
-MiniAI::MiniAI(int layers, int hidden_dim, int vocab_size)
-    : layers_(layers),
-      hidden_dim_(hidden_dim),
-      vocab_size_(vocab_size),
-      embedding_(vocab_size, hidden_dim),
-      block_(hidden_dim),
-      embed_out_(),
-      block_out_() {}
-
-Tensor4D MiniAI::forward_ids(
-    int B,
-    int T,
-    const std::vector<int32_t>& token_ids
-) {
-    // Embedding
-    embed_out_ = embedding_.forward_ids(B, T, token_ids);
-
-    // Transformer block
-    block_out_ = block_.forward(embed_out_);
-
-    return block_out_;
+static uint32_t argmax(const std::vector<float>& v) {
+    uint32_t m = 0;
+    for (uint32_t i = 1; i < v.size(); ++i)
+        if (v[i] > v[m]) m = i;
+    return m;
 }
 
-void MiniAI::backward(const Tensor4D& dlogits) {
-    // backward through transformer
-    Tensor4D dembed = block_.backward(embed_out_, dlogits);
+MiniAI::MiniAI(int vocab, int dim)
+: emb(vocab, dim), proj(dim, vocab) {
 
-    // backward through embedding
-    embedding_.backward(dembed);
+    std::ifstream f1("engine/mini_llm/train/weights_emb.bin", std::ios::binary);
+    f1.read((char*)emb.W.data(), emb.W.size()*sizeof(float));
+
+    std::ifstream f2("engine/mini_llm/train/weights_proj.bin", std::ios::binary);
+    f2.read((char*)proj.W.data(), proj.W.size()*sizeof(float));
 }
 
-void MiniAI::step(float lr) {
-    embedding_.step(lr);
-    block_.step(lr);
+uint32_t MiniAI::forward_token(uint32_t t) {
+    auto h = emb.forward(t);
+    auto logits = proj.forward(h);
+    return argmax(logits);
 }

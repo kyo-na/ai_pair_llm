@@ -1,20 +1,45 @@
-#include "../../include/adam.h"
+#include "optimizer/adam.h"
 #include <cmath>
 
-Adam::Adam(int n, float lr_)
-    : lr(lr_), b1(0.9f), b2(0.999f), eps(1e-8f),
-      step(0), m(n,0.0f), v(n,0.0f) {}
+Adam::Adam(float lr)
+    : lr_(lr),
+      beta1_(0.9f),
+      beta2_(0.999f),
+      eps_(1e-8f),
+      t_(0)
+{
+}
 
-void Adam::update(Tensor4D& w) {
-    step++;
-    for (int i = 0; i < w.size(); i++) {
-        float g = w.grad[i];
-        m[i] = b1*m[i] + (1-b1)*g;
-        v[i] = b2*v[i] + (1-b2)*g*g;
+void Adam::step(std::vector<Tensor4D*>& params)
+{
+    t_++;
 
-        float mh = m[i] / (1 - std::pow(b1, step));
-        float vh = v[i] / (1 - std::pow(b2, step));
+    for (auto* p : params)
+    {
+        if (m_.find(p) == m_.end())
+        {
+            m_[p] = std::vector<float>(p->data.size(), 0.0f);
+            v_[p] = std::vector<float>(p->data.size(), 0.0f);
+        }
 
-        w.data[i] -= lr * mh / (std::sqrt(vh) + eps);
+        for (size_t i = 0; i < p->data.size(); ++i)
+        {
+            float g = p->grad[i];
+
+            m_[p][i] = beta1_ * m_[p][i]
+                     + (1 - beta1_) * g;
+
+            v_[p][i] = beta2_ * v_[p][i]
+                     + (1 - beta2_) * g * g;
+
+            float m_hat = m_[p][i] /
+                (1 - std::pow(beta1_, t_));
+
+            float v_hat = v_[p][i] /
+                (1 - std::pow(beta2_, t_));
+
+            p->data[i] -= lr_ *
+                m_hat / (std::sqrt(v_hat) + eps_);
+        }
     }
 }

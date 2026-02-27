@@ -1,27 +1,14 @@
 #pragma once
 #include <vector>
-#include <algorithm>
+#include <cstdint>
 
 struct Tensor {
+    int rows, cols;
     std::vector<float> data;
-    std::vector<float> grad;
 
-    // Adam 用（★追加）
-    std::vector<float> m;
-    std::vector<float> v;
+    Tensor(int r=0,int c=0):rows(r),cols(c),data(r*c){}
 
-    int n;
-
-    Tensor() : n(0) {}
-
-    Tensor(int n)
-        : data(n, 0.0f),
-          grad(n, 0.0f),
-          m(n, 0.0f),
-          v(n, 0.0f),
-          n(n) {}
-
-    void zero_grad() {
-        std::fill(grad.begin(), grad.end(), 0.0f);
+    float& operator()(int r,int c){
+        return data[r*cols+c];
     }
 };

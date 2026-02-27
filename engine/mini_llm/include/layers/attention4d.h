@@ -1,18 +1,39 @@
-// attention4d.h
 #pragma once
 #include "tensor4d.h"
-#include "softmax4d.h"
+#include "cache/kv_cache4d.h"
+#include "cache/kv_cache_ring4d.h"
+#include "runtime/infer_context.h"
+#include <vector>
 
-struct Attention4D {
-    Tensor4D last_attn;
+class Attention4D {
+public:
+    Attention4D(int H,int D);
 
-    Tensor4D forward(const Tensor4D& qk) {
-        last_attn = softmax4d(qk);
-        return last_attn;
-    }
+    // 学習・通常forward（既存互換）
+    Tensor4D forward(
+        const Tensor4D& x,
+        KVCache4D* cache=nullptr,
+        bool use_cache=false);
 
-    Tensor4D backward(const Tensor4D& grad_out) {
-        // ★ 簡易：softmax backward 省略（実験用）
-        return grad_out;
-    }
+    Tensor4D backward(const Tensor4D& grad);
+
+    std::vector<Tensor4D*> parameters();
+
+    // ✅ 推論専用: 1step (B,1,H,D) 入力 + RingKV を使って fused attention
+    // out: (B,1,H,D)
+    Tensor4D forward_infer_fused(
+        const Tensor4D& x_step,
+        KVCacheRing4D* ring,
+        InferContext& ctx);
+
+private:
+    int H_;
+    int D_;
+
+    Tensor4D Wq_;
+    Tensor4D Wk_;
+    Tensor4D Wv_;
+    Tensor4D Wo_;
+
+    Tensor4D last_x_;
 };

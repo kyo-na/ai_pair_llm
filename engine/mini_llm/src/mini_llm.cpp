@@ -1,20 +1,21 @@
-#include "api/mini_llm_api.h"
-#include "world/world_model.h"
+#include "mini_llm.h"
 
-MiniLLM::MiniLLM() {
-    ai_ = new MiniAI(2, 64);
-    world_ = new WorldModel(1, 8, 1, 64);
-    world_->init();
+#include "layers/embedding4d.h"
+#include "layers/attention4d.h"
+#include "decode/vocab_projection.h"
+#include "decode/sampling.h"
+
+MiniLLM::MiniLLM(int vocab_size_, int dim_)
+    : training(false),
+      vocab_size(vocab_size_),
+      dim(dim_) {}
+
+void MiniLLM::set_train(bool t) {
+    training = t;
 }
 
-MiniLLMResult MiniLLM::forward(const MiniLLMTask& task) {
-    MiniLLMResult r{};
-    if (!task.input) return r;
-
-    Tensor4D h = ai_->forward(*task.input);
-    world_->inject_observation(h);
-    world_->step_forward();
-
-    r.loss = 0.0f;
-    return r;
+int MiniLLM::infer_next(int token) {
+    // 最小ダミー推論（本体確認用）
+    // token をそのまま返すだけ
+    return token;
 }

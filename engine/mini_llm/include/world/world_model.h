@@ -1,20 +1,11 @@
 #pragma once
-#include "world/world_state.h"
-#include "blocks/transformer_block4d.h"
+#include "world4d.h"
 
+// World4D 専用・推論用インターフェース
 struct WorldModel {
+    World4D world;
 
-    TransformerBlock4D transition;
-    WorldState current;
+    WorldModel(size_t B, size_t T, size_t D, size_t C);
 
-    WorldModel(int B, int T, int H, int D);
-
-    void init();
-    void inject_observation(const Tensor4D& obs);
-    void step_forward();
-
-    // World loss からの勾配
-    void backward(const Tensor4D& dloss);
-
-    void update(float lr);
+    void step_infer(size_t t);
 };

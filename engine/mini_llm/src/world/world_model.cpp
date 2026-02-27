@@ -1,59 +1,15 @@
-#include "world/world_model.h"
-#include <cassert>
+#include "world_model.h"
+#include <cmath>
 
-// -----------------------------
-// constructor
-// -----------------------------
-WorldModel::WorldModel(int B, int T, int H, int D)
-    : transition(D),
-      current(B, T, H, D)
-{
-}
+WorldModel::WorldModel(size_t B, size_t T, size_t D, size_t C)
+    : world(B, T, D, C) {}
 
-// -----------------------------
-// init
-// -----------------------------
-void WorldModel::init()
-{
-    current.zero();
-}
-
-// -----------------------------
-// inject observation
-// -----------------------------
-void WorldModel::inject_observation(const Tensor4D& obs)
-{
-    assert(obs.B == current.latent.B);
-    assert(obs.T == current.latent.T);
-    assert(obs.H == current.latent.H);
-    assert(obs.D == current.latent.D);
-
-    current.latent = obs;
-}
-
-// -----------------------------
-// step forward (world transition)
-// -----------------------------
-void WorldModel::step_forward()
-{
-    current.latent = transition.forward(current.latent);
-}
-
-// -----------------------------
-// backward
-// ⚠ TransformerBlock4D は
-// backward(x, dout) なので
-// current.latent を必ず渡す
-// -----------------------------
-void WorldModel::backward(const Tensor4D& dloss)
-{
-    transition.backward(current.latent, dloss);
-}
-
-// -----------------------------
-// update
-// -----------------------------
-void WorldModel::update(float lr)
-{
-    transition.step(lr);
+void WorldModel::step_infer(size_t t) {
+    // sample で動いていた 4D 更新ロジック
+    for (size_t b = 0; b < world.B; ++b)
+    for (size_t d = 0; d < world.D; ++d)
+    for (size_t c = 0; c < world.C; ++c) {
+        float prev = (t > 0) ? world.at(b, t-1, d, c) : 0.0f;
+        world.at(b, t, d, c) = std::tanh(prev);
+    }
 }

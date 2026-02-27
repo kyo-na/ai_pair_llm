@@ -1,75 +1,57 @@
-// engine/mini_llm/src/layers/ffn4d.cpp
-#include "../../include/layers/ffn4d.h"
-#include <algorithm>
+#include "layers/ffn4d.h"
 
-namespace mini_llm {
-
-// ----------------------------
-// Forward
-// ----------------------------
-Tensor4D FFN4D::forward(const Tensor4D& x) {
-    cache_x = x;
-
-    Tensor4D h(x.B, x.T, x.H, hidden);
-    Tensor4D out(x.B, x.T, x.H, x.D);
-
-    // Linear1 + ReLU
-    for (int i = 0; i < x.size(); ++i) {
-        float v = 0.0f;
-        for (int d = 0; d < x.D; ++d)
-            v += x.data[i * x.D + d] * w1[d];
-        h.data[i * hidden] = std::max(0.0f, v);
-    }
-
-    // Linear2
-    for (int i = 0; i < out.size(); ++i) {
-        float v = 0.0f;
-        for (int d = 0; d < hidden; ++d)
-            v += h.data[i * hidden + d] * w2[d];
-        out.data[i] = v;
-    }
-
-    cache_h = h;
-    return out;
+FFN4D::FFN4D(int heads, int dim, float dropout_p)
+    : linear1_(heads, dim),
+      linear2_(heads, dim),
+      dropout_(dropout_p)
+{
 }
 
-// ----------------------------
-// Backward
-// ----------------------------
-Tensor4D FFN4D::backward(const Tensor4D& grad_out) {
-    Tensor4D grad_x = cache_x;
+Tensor4D FFN4D::forward(const Tensor4D& x, bool train_mode)
+{
+    hidden_ = linear1_.forward(x);
 
-    // grad w2
-    for (int i = 0; i < grad_out.size(); ++i)
-        for (int d = 0; d < hidden; ++d)
-            gw2[d] += grad_out.data[i] * cache_h.data[i * hidden + d];
+    // ReLU
+    for(int b=0;b<hidden_.B;++b)
+    for(int t=0;t<hidden_.T;++t)
+    for(int h=0;h<hidden_.H;++h)
+    for(int d=0;d<hidden_.D;++d)
+        if(hidden_.at(b,t,h,d) < 0)
+            hidden_.at(b,t,h,d) = 0;
 
-    // grad w1
-    for (int i = 0; i < grad_out.size(); ++i) {
-        float g = 0.0f;
-        for (int d = 0; d < hidden; ++d)
-            g += grad_out.data[i] * w2[d];
-        if (cache_h.data[i * hidden] <= 0) g = 0;
+    hidden_ = dropout_.forward(hidden_, train_mode);
 
-        for (int d = 0; d < cache_x.D; ++d)
-            gw1[d] += g * cache_x.data[i * cache_x.D + d];
-    }
-
-    return grad_x;
+    return linear2_.forward(hidden_);
 }
 
-// ----------------------------
-// Step
-// ----------------------------
-void FFN4D::step(float lr) {
-    for (int i = 0; i < hidden; ++i) {
-        w2[i] -= lr * gw2[i];
-        gw2[i] = 0;
-    }
-    for (int i = 0; i < cache_x.D; ++i) {
-        w1[i] -= lr * gw1[i];
-        gw1[i] = 0;
-    }
+Tensor4D FFN4D::backward(const Tensor4D& grad)
+{
+    // Linear2 backward
+    Tensor4D dHidden = linear2_.backward(grad);
+
+    // Dropout backward
+    dHidden = dropout_.backward(dHidden);
+
+    // ReLU backward
+    for(int b=0;b<dHidden.B;++b)
+    for(int t=0;t<dHidden.T;++t)
+    for(int h=0;h<dHidden.H;++h)
+    for(int d=0;d<dHidden.D;++d)
+        if(hidden_.at(b,t,h,d) <= 0)
+            dHidden.at(b,t,h,d) = 0;
+
+    return linear1_.backward(dHidden);
 }
 
-} // namespace mini_llm
+std::vector<Tensor4D*> FFN4D::parameters()
+{
+    std::vector<Tensor4D*> p;
+
+    auto p1 = linear1_.parameters();
+    auto p2 = linear2_.parameters();
+
+    p.insert(p.end(), p1.begin(), p1.end());
+    p.insert(p.end(), p2.begin(), p2.end());
+
+    return p;
+}

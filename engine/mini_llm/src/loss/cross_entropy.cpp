@@ -1,26 +1,51 @@
 #include "loss/cross_entropy.h"
 #include <cmath>
 
-float softmax_cross_entropy(
-    const Tensor4D& logits,
-    int target,
-    Tensor4D& dlogits
-){
-    const int V = logits.W;
-    float maxv=-1e9;
-    for(int i=0;i<V;i++)
-        maxv = std::max(maxv, logits.data[i]);
+float CrossEntropy::forward(const Tensor4D& logits,
+                            const std::vector<int>& target)
+{
+    target_ = target;
 
-    float sum=0;
-    for(int i=0;i<V;i++){
-        dlogits.data[i]=std::exp(logits.data[i]-maxv);
-        sum+=dlogits.data[i];
+    int B = logits.B;
+    int T = logits.T;
+    int D = logits.D;
+
+    probs_ = Tensor4D(B, T, 1, D);
+
+    float loss = 0.0f;
+
+    for(int t = 0; t < T; ++t)
+    {
+        float maxv = -1e9f;
+        for(int d = 0; d < D; ++d)
+            maxv = std::max(maxv, logits.at(0,t,0,d));
+
+        float sum = 0.0f;
+        for(int d = 0; d < D; ++d)
+        {
+            float e = std::exp(logits.at(0,t,0,d) - maxv);
+            probs_.at(0,t,0,d) = e;
+            sum += e;
+        }
+
+        for(int d = 0; d < D; ++d)
+            probs_.at(0,t,0,d) /= sum;
+
+        loss -= std::log(probs_.at(0,t,0,target[t]) + 1e-9f);
     }
 
-    for(int i=0;i<V;i++)
-        dlogits.data[i]/=sum;
+    return loss / T;
+}
 
-    float loss = -std::log(dlogits.data[target]+1e-9f);
-    dlogits.data[target]-=1.f;
-    return loss;
+Tensor4D CrossEntropy::backward()
+{
+    Tensor4D grad = probs_;
+
+    int T = grad.T;
+    int D = grad.D;
+
+    for(int t=0; t<T; ++t)
+        grad.at(0,t,0,target_[t]) -= 1.0f;
+
+    return grad;
 }

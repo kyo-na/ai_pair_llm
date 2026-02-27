@@ -1,10 +1,11 @@
-// embedding.h
 #pragma once
-#include "tensor4d.h"
+#include <vector>
+#include <cstdint>
 
 struct Embedding {
-    Tensor4D weight;
-    Embedding(int vocab,int dim):weight(1,1,vocab,dim){}
-    Tensor4D forward(int id);
-    void backward(int id,const Tensor4D& grad);
+    int vocab, dim;
+    std::vector<float> W;
+
+    Embedding(int v, int d);
+    std::vector<float> forward(uint32_t token);
 };

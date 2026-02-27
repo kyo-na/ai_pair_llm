@@ -1,0 +1,60 @@
+#include "mini_llm.h"
+#include <cmath>
+#include <fstream>
+#include <iostream>
+
+// コンストラクタ
+MiniLLM::MiniLLM(size_t vocab, size_t c)
+    : C(c),
+      W_embed(vocab * c, 0.01f) {}
+
+// 重みロード（正しい read 2引数版）
+void MiniLLM::load_weights(
+    const char* emb_path,
+    const char* /*proj_path*/
+) {
+    std::ifstream f(emb_path, std::ios::binary);
+    if (!f) {
+        std::cerr << "failed to open " << emb_path << "\n";
+        return;
+    }
+
+    f.read(
+        reinterpret_cast<char*>(W_embed.data()),
+        W_embed.size() * sizeof(float)
+    );
+
+    if (!f) {
+        std::cerr << "failed to read weights\n";
+    }
+}
+
+// 4D state updater
+void MiniLLM::step(
+    World4D& world,
+    size_t t,
+    const std::vector<unsigned>& input_ids
+) {
+    for (size_t d = 0; d < world.D; ++d) {
+        for (size_t c = 0; c < world.C; ++c) {
+            float sum = 0.0f;
+            for (auto id : input_ids) {
+                sum += W_embed[id * C + c];
+            }
+
+            float prev =
+                (t > 0) ? world.at(0, t - 1, d, c) : 0.0f;
+
+            world.at(0, t, d, c) =
+                std::tanh(sum + 0.5f * prev);
+        }
+    }
+
+    // critic → main
+    for (size_t d = 1; d < world.D; ++d) {
+        for (size_t c = 0; c < world.C; ++c) {
+            world.at(0, t, 0, c) +=
+                0.1f * world.at(0, t, d, c);
+        }
+    }
+}

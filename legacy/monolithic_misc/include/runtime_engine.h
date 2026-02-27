@@ -1,7 +1,7 @@
 #pragma once
 #include "llama_weights.h"
 #include "memory_arena.h"
-#include "kv_cache.h"
+#include "cache/kv_cache.h"
 #include <vector>
 
 class LlamaRuntimeGPU {

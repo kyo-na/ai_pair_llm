@@ -1,21 +1,21 @@
 #pragma once
-#include "tensor4d.h"
-#include "layers/layernorm4d.h"
 #include "layers/attention4d.h"
-#include "layers/linear4d.h"
+#include "layers/rmsnorm4d.h"
+#include "layers/swiglu4d.h"
 
-struct TransformerBlock4D {
-    LayerNorm4D ln1;
-    Attention4D attn;
-    LayerNorm4D ln2;
-    Linear4D    ffn;
-
-    Tensor4D last_x;
-
-    TransformerBlock4D(int dim)
-        : ln1(dim), attn(dim), ln2(dim), ffn(dim, dim), last_x() {}
+class TransformerBlock4D {
+public:
+    TransformerBlock4D(
+        int heads,
+        int head_dim,
+        int ffn_hidden);
 
     Tensor4D forward(const Tensor4D& x);
-    Tensor4D backward(const Tensor4D& x, const Tensor4D& dout);
-    void step(float lr);
+    Tensor4D backward(const Tensor4D& grad);
+
+private:
+    Attention4D attn_;
+    RMSNorm4D norm1_;
+    RMSNorm4D norm2_;
+    SwiGLU4D ffn_;
 };

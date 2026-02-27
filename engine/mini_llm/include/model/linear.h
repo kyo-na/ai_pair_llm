@@ -1,13 +1,10 @@
 #pragma once
-#include "../tensor4d.h"
+#include <vector>
 
 struct Linear {
-    Tensor4D weight; // [Dout, Din, 1, 1]
-    Tensor4D last_x;
+    int in, out;
+    std::vector<float> W, b;
 
-    Linear(int in,int out)
-        : weight(out,in,1,1), last_x(1,in,1,1) {}
-
-    Tensor4D forward(const Tensor4D& x);
-    Tensor4D backward(const Tensor4D& gy);
+    Linear(int i, int o);
+    std::vector<float> forward(const std::vector<float>& x);
 };

@@ -1,0 +1,22 @@
+#pragma once
+#include <vector>
+#include <cstddef>
+#include "world4d.h"
+
+struct MiniLLM {
+    size_t C;
+    std::vector<float> W_embed;
+
+    MiniLLM(size_t vocab, size_t c);
+
+    void load_weights(
+        const char* emb_path,
+        const char* proj_path
+    );
+
+    void step(
+        World4D& world,
+        size_t t,
+        const std::vector<unsigned>& input_ids
+    );
+};

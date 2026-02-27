@@ -1,50 +1,39 @@
 #include "blocks/transformer_block4d.h"
 
-Tensor4D TransformerBlock4D::forward(const Tensor4D& x){
-    last_x = x;
+TransformerBlock4D::TransformerBlock4D(
+    int heads,
+    int head_dim,
+    int ffn_hidden)
+: attn_(heads, head_dim),
+  norm1_(1, heads*head_dim),
+  norm2_(1, heads*head_dim),
+  ffn_(1, heads*head_dim, ffn_hidden)
+{}
 
-    // Attention block
-    Tensor4D h1 = ln1.forward(x);
-    Tensor4D a  = attn.forward(h1);
+Tensor4D TransformerBlock4D::forward(
+    const Tensor4D& input)
+{
+    Tensor4D x = input;
 
-    for(size_t i=0;i<a.data.size();i++){
-        a.data[i] += x.data[i];   // residual
-    }
+    // ---- Norm1 ----
+    Tensor4D n1 = norm1_.forward(x);
 
-    // FFN block（Linearのみ）
-    Tensor4D h2 = ln2.forward(a);
-    Tensor4D y  = ffn.forward(h2);
+    // ---- Attention ----
+    Tensor4D attn_out = attn_.forward(n1);
 
-    for(size_t i=0;i<y.data.size();i++){
-        y.data[i] += a.data[i];   // residual
-    }
-    return y;
-}
+    // ---- Residual ----
+    for(int d=0; d<x.D; ++d)
+        x.at(0,0,0,d) += attn_out.at(0,0,0,d);
 
-Tensor4D TransformerBlock4D::backward(const Tensor4D& x, const Tensor4D& dout){
-    // FFN backward
-    Tensor4D d_ffn = ffn.backward(dout);
-    Tensor4D d_ln2 = ln2.backward(d_ffn);
+    // ---- Norm2 ----
+    Tensor4D n2 = norm2_.forward(x);
 
-    Tensor4D da(x.B, x.T, x.H, x.D);
-    for(size_t i=0;i<da.data.size();i++){
-        da.data[i] = dout.data[i] + d_ln2.data[i];
-    }
+    // ---- FFN ----
+    Tensor4D ffn_out = ffn_.forward(n2);
 
-    // Attention backward
-    Tensor4D d_attn = attn.backward(da);
-    Tensor4D d_ln1  = ln1.backward(d_attn);
+    // ---- Residual ----
+    for(int d=0; d<x.D; ++d)
+        x.at(0,0,0,d) += ffn_out.at(0,0,0,d);
 
-    Tensor4D dx(x.B, x.T, x.H, x.D);
-    for(size_t i=0;i<dx.data.size();i++){
-        dx.data[i] = da.data[i] + d_ln1.data[i];
-    }
-    return dx;
-}
-
-void TransformerBlock4D::step(float lr){
-    ln1.step(lr);
-    attn.step(lr);
-    ln2.step(lr);
-    ffn.step(lr);
+    return x;
 }
